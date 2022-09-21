@@ -1,11 +1,16 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import InputGroup from "../components/InputGroup";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 const Login = () => {
   let router = useRouter();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<any>({});
+
   return (
     <div className="bg-white">
       <div className="flex flex-col items-center justify-center h-screen p-6">
