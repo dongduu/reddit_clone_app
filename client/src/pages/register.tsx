@@ -1,8 +1,8 @@
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import InputGroup from "../components/InputGroup";
-import axios from "axios";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ const Register = () => {
       });
 
       console.log(res);
-      router.push("./login");
+      //   router.push("./login");
     } catch (error: any) {
       console.log(error);
       setErrors(error.response.data || {});
