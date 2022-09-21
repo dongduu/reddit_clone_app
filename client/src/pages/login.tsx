@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import InputGroup from "../components/InputGroup";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -10,6 +10,25 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<any>({});
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "/auth/login",
+        {
+          password,
+          username,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+    } catch (error: any) {
+      console.log(error);
+      setErrors(error.response.data || {});
+    }
+  };
 
   return (
     <div className="bg-white">
