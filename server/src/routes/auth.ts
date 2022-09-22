@@ -1,4 +1,4 @@
-import { validate } from "class-validator";
+import { isEmpty, validate } from "class-validator";
 import { Router, Request, Response } from "express";
 import User from "../entities/User";
 
@@ -48,8 +48,25 @@ const register = async (req: Request, res: Response) => {
   }
 };
 
+const login = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  try {
+    let errors: any = {};
+
+    // 비워져있다면 에러를 프론트엔드로 보내주기
+    if (isEmpty(username))
+      errors.username = "사용자 이름은 비워둘 수 없습니다.";
+    if (isEmpty(password)) errors.password = "비밀번호는 비워둘 수 없습니다.";
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json(errors);
+    }
+  } catch (error) {}
+};
+
 const router = Router();
 
 router.post("/register", register);
+router.post("/login", login);
 
 export default router;
