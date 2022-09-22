@@ -86,7 +86,10 @@ const login = async (req: Request, res: Response) => {
     res.set("Set-Cookie", cookie.serialize("token", token));
 
     return res.json({ user, token });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
 };
 
 const router = Router();
