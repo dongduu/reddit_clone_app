@@ -1,7 +1,9 @@
 import { isEmpty, validate } from "class-validator";
 import { Router, Request, Response } from "express";
-import { runInNewContext } from "vm";
 import User from "../entities/User";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import cookie from "cookie";
 
 const mapError = (errors: Object[]) => {
   return errors.reduce((prev: any, err: any) => {
