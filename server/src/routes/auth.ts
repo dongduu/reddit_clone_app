@@ -70,6 +70,22 @@ const login = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json({ username: "사용자 이름이 등록되지 않았습니다." });
+
+    // 유저가 있다면 비밀번호 비교하기
+    const passwordMatches = await bcrypt.compare(password, user.password);
+
+    // 비밀번호가 다르다면 에러 보내기
+    if (!passwordMatches) {
+      return res.status(401).json({ password: "비밀번호가 잘못되었습니다." });
+    }
+
+    // 비밀번호가 맞다면 토큰 생성
+    const token = jwt.sign({ username }, process.env.JWT_SECRET);
+
+    // 쿠키 저장
+    res.set("Set-Cookie", cookie.serialize("token", token));
+
+    return res.json({ user, token });
   } catch (error) {}
 };
 
