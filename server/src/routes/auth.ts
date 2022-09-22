@@ -1,5 +1,6 @@
 import { isEmpty, validate } from "class-validator";
 import { Router, Request, Response } from "express";
+import { runInNewContext } from "vm";
 import User from "../entities/User";
 
 const mapError = (errors: Object[]) => {
@@ -61,6 +62,14 @@ const login = async (req: Request, res: Response) => {
     if (Object.keys(errors).length > 0) {
       return res.status(400).json(errors);
     }
+
+    // db에서 유저 찾기
+    const user = await User.findOneBy({ username });
+
+    if (!user)
+      return res
+        .status(404)
+        .json({ username: "사용자 이름이 등록되지 않았습니다." });
   } catch (error) {}
 };
 
