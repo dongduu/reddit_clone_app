@@ -24,6 +24,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
+      console.log("hi");
     } catch (error: any) {
       console.log(error);
       setErrors(error.response.data || {});

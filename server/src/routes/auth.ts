@@ -7,7 +7,7 @@ import cookie from "cookie";
 
 const mapError = (errors: Object[]) => {
   return errors.reduce((prev: any, err: any) => {
-    prev[err.property] = Object.entries(err.constraint[0][1]);
+    prev[err.property] = Object.entries(err.constraint)[0][1];
 
     return prev;
   }, {});
