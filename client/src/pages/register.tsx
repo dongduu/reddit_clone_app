@@ -12,19 +12,18 @@ const Register = () => {
 
   let router = useRouter();
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     try {
       const res = await axios.post("/auth/register", {
         email,
         password,
         username,
       });
-
-      console.log(res);
-      router.push("./login");
+      console.log("res", res);
+      router.push("/login");
     } catch (error: any) {
-      console.log(error);
+      console.log("error", error);
       setErrors(error.response.data || {});
     }
   };
@@ -45,7 +44,7 @@ const Register = () => {
               placeholder="Username"
               value={username}
               setValue={setUsername}
-              error={errors.user}
+              error={errors.username}
             />
             <InputGroup
               placeholder="Password"

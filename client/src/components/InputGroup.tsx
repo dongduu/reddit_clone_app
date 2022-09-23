@@ -31,7 +31,7 @@ const InputGroup: React.FC<InputGroupProps> = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <small className="font-medium text-red-500"></small>
+      <small className="font-medium text-red-500">{error}</small>
     </div>
   );
 };

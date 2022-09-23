@@ -41,7 +41,7 @@ const Login = () => {
               placeholder="Username"
               value={username}
               setValue={setUsername}
-              error={errors.user}
+              error={errors.username}
             />
             <InputGroup
               placeholder="Password"
