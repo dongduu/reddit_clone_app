@@ -16,3 +16,11 @@ const StateContext = createContext<State>({
 
 // 업데이트용
 const DispatchContext = createContext<any>(null);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <DispatchContext.Provider value={dispatch}>
+      <StateContext.Provider value={state}>{children}</StateContext.Provider>
+    </DispatchContext>
+  );
+};
